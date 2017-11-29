@@ -6,4 +6,4 @@ This replacement version with MQTT supports lets you control the setpoint and re
 
 The hardware is based on on an ESP8266 module, the ESP-12F, combining it with a digital potentiometer for the setpoint control and an NTC resistor for temperature reading.
 
-PS. The uploaded HW version is untested, although an earlier version has been built and tested with mostly good results.
+PS. The uploaded HW version is untested, although an earlier version has been built and tested with mostly good results. This version improves the power supply (DC/DC instead of all linear), possibility to measure the supply voltage (which actually enables us to understand if the heatpump is working or not since the voltage will drop significantly when it does).
