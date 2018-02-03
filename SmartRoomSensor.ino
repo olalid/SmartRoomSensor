@@ -1,3 +1,5 @@
+//#include <ArduinoOTA.h>
+
 #include <FS.h>                   //this needs to be first, or it all crashes and burns...
 
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
@@ -12,6 +14,7 @@
 #include <PubSubClient.h>
 
 //#define DEBUG_CONFIG 1
+#define ADC_SEL_PIN 4
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -104,18 +107,26 @@ void setup() {
   
   bootTime = millis();
   
-  // put your setup code here, to run once:
+  // Init serial port
   Serial.begin(115200);
   Serial.println();
+  Serial.println("Smart Room Sensor reboot");
 
+  // Init I/O and select ADC input
+  pinMode(ADC_SEL_PIN, OUTPUT);
+  digitalWrite(ADC_SEL_PIN, LOW);
+
+  
   //clean FS, for testing
 #ifdef DEBUG_CONFIG
+  Serial.println("Debug mode, erasing FS");
   SPIFFS.format();
 #endif
 
   //Try to read configuration from FS json
-  Serial.println("mounting FS...");
 
+  //ESP.deepSleep(1*1e6);
+  
   if (SPIFFS.begin()) {
     Serial.println("mounted file system");
     if (SPIFFS.exists("/config.json")) {
@@ -273,8 +284,6 @@ void setup() {
   }
   if (r) {
     Serial.println("connected");
-    // Publish a mode topic to make Home Assistant happy...
-    client.publish(mqtt_mode_topic, "heat", true);
     // ... and subscribe
     Serial.print("Subscribe to: ");
     Serial.println(mqtt_tset_topic);
@@ -282,20 +291,22 @@ void setup() {
   } else {
     Serial.print("failed, rc=");
     Serial.print(client.state());
-    Serial.println(" try again in 10 seconds. Going to sleep.");
+    Serial.println(" trying again in 10 seconds. Going to sleep.");
     ESP.deepSleep(10*1e6);
-
   }
   // Library process
   client.loop();
 
   // Read current temperature frpm ADC
   adcVal = analogRead(A0);
+  // Select the other input to use later
+  digitalWrite(ADC_SEL_PIN, HIGH);
   snprintf(msg, 75, "Analog input: %ld", adcVal);
   Serial.println(msg);
 
   // Publish current temperature to the MQTT server
-  adcVal = (607.84091-(0.719697*((double)adcVal)))+1;
+  //adcVal = (607.84091-(0.719697*((double)adcVal)))+1;
+  adcVal = (613.84091-(0.719697*((double)adcVal)))+1;
   snprintf (msg, 75, "%ld.", adcVal/10);
   if(adcVal % 10 >= 5)
     strcat(msg, "5");
@@ -305,6 +316,18 @@ void setup() {
   Serial.println(msg);
   client.publish(mqtt_cget_topic, msg, true);
 
+  // Read current supply voltage from the ADC
+  adcVal = analogRead(A0);
+  snprintf(msg, 75, "Analog input: %ld", adcVal);
+  Serial.println(msg);
+  
+  // Publish current mode
+  //adcVal = (adcVal * 280) / 1024;
+  if(adcVal > 762)
+    client.publish(mqtt_mode_topic, "idle", true);
+  else
+    client.publish(mqtt_mode_topic, "heat", true);
+  
   long start, now;
   start = millis();
   for(;;) {
@@ -327,16 +350,17 @@ void setup() {
   bootTime = millis() - bootTime;
   snprintf(msg, 75, "Active time: %ld msecs", bootTime);
   Serial.println(msg);
-  Serial.println("Now going to sleep. See you on the other side...");
+  Serial.println("Now going to sleep.");
   if(bootTime > 59e3)
     ESP.deepSleep(60*1e6);
-  
+
+  // Calculate how long to sleep so that we wake up with approximately 60 second intervals
   ESP.deepSleep((60-(bootTime/1000))*1e6);
   
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // No code here since the code only runs once and then goes to sleep.
 
 }
 
