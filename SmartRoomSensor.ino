@@ -11,7 +11,11 @@
 
 #include <ArduinoJson.h>          //https://github.com/bblanchon/ArduinoJson
 #define MQTT_VERSION MQTT_VERSION_3_1
-#include <PubSubClient.h>
+#include <PubSubClient.h>         // NOTE: PubSubClient.cpp library needs to be patched to correctly support receiving retained messages
+                                  // at connect (remove the clean session flag).
+                                  // Add the line: v = v & 0xFD;
+                                  // PubSubClient::connect
+                                  // See https://github.com/knolleary/pubsubclient/issues/174
 
 //#define DEBUG_CONFIG 1
 #define ADC_SEL_PIN 4
@@ -108,7 +112,7 @@ void setup() {
   bootTime = millis();
   
   // Init serial port
-  Serial.begin(115200);
+  Serial.begin(74880);
   Serial.println();
   Serial.println("Smart Room Sensor reboot");
 
@@ -209,7 +213,7 @@ void setup() {
   //sets timeout until configuration portal gets turned off
   //useful to make it all retry or go to sleep
   //in seconds
-  //wifiManager.setTimeout(120);
+  wifiManager.setTimeout(30);
 
   //fetches ssid and pass and tries to connect
   //if it does not connect it starts an access point with the specified name
