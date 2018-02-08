@@ -51,3 +51,7 @@ mode: the topic where the unit will publish the current heatpump mode (heat or i
 # Known problems
 The unit does heat up a bit, compared to the surrounding room temperature, which results in a temperature reading that is 1-2 degrees more than the actual temperature. So the target temperature needs to be increased accordingly. I.e. if you want to have 21 degrees in the room, set 22 or 23 degrees.
 This could possibly be compensated by increasing the value of R2 slightly, but this has not (yet) been tested.
+
+# Enclosure
+The unit fits in a Supertronic PP42 enclosure. This is also sold as Qubino ZMNHGA1.
+See https://www.m.nu/tillbehor/plastbox-vit-med-lufthal-for-vaggmontering
