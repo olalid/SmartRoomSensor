@@ -1,0 +1,25 @@
+Qty;Parts;Value;Description;Farnell order code;m.nu order code
+7;C1, C4, C5, C6, C12, C15, C16;100n;CAPACITOR, European symbol;1759122;
+6;R5, R8, R9, R11, R15, R16;10k;RESISTOR, European symbol;2447230;
+7;C2, C3, C8, C9, C10, C13, C14;10u;CAPACITOR, European symbol;2611943;
+2;R2, R10;169R;RESISTOR, European symbol;2303081;
+1;D1;1SMB5937BT3G;Z-Diode;1431179;
+1;JP2;2 pin header;JUMPER;1593411;
+1;R4;2.2k;PHILIPS NTC;1187025;
+1;R3;20k;RESISTOR, European symbol;2447293;
+2;C7, C11;22u;CAPACITOR, European symbol;2309030;
+1;R7;270k;RESISTOR, European symbol;2447313;
+1;X1;5 x Screw clamp;WAGO SREW CLAMP;1717004;
+1;R1;56k;RESISTOR, European symbol;2303215;
+1;JP1;6 pin header;PIN HEADER;1593415;
+1;R12;6k8;RESISTOR, European symbol;2447427;
+1;U2;ESP-12F;ESP12F Module;;ESP12F
+2;FB1, FB2;Ferrite;RESISTOR, European symbol;1635706;
+1;U4;LMR14206;LMR14206 SIMPLE SWITCHER® 42Vin, 0.6A Step-Down Voltage Regulator in SOT-23;2064681;
+1;U6;MCP130T-315I/TT;Reset circuit;9758470;
+1;U3;MCP41010-I/SN;Digital POT;9758607;
+1;L1;ME3220-153KLB;Inductor;2287926;
+1;U1;REG1117;800mA and 1A Low Dropout (LDO) Positive Regulator;1825376;
+1;D2;S1A;Schottky diode;1559148;
+1;U5;SN74LVC1G3157DBVR;Single-Pole, Double-Throw Analog Switch;1470910;
+2;SW1, SW2;SPST_TACT-KMR2;SMT 6mm switch, EVQQ2 series;1437636;
