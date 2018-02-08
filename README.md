@@ -6,7 +6,8 @@ The NIBE RG20 room sensor is a very simple thermostat like device that is connec
 This replacement version has MQTT support and lets you control the setpoint and read back the current temperature from your home automation system. It also shows the status (heating or idle) of the heatpump.
 It connects to the same interface in the heatpump as the RG20 does plus that it steals some power from the heatpump internal PSU (which is around 20-24V).
 
-The hardware is based on on an ESP8266 module, the ESP-12F, combining it with a digital potentiometer for the setpoint control and an NTC resistor for temperature reading.
+The hardware is based on on an ESP8266 module, the ESP-12F, combining it with a digital potentiometer for the setpoint control and an NTC resistor for temperature reading. The heatpump power supply has reduced voltage when the heatpump is active, so measuring that voltage makes it possible to detect if the heatpumpt is active or not.
+
 Ths software is based on Arduino and support libraries WiFiManager and PubSubClinet.
 A minor modification to PubSubClient is needed, so the modified file is also included.
 
@@ -46,3 +47,7 @@ tget: the topic where the unit will publish the configured target temperature.
 cget: the topic where the unit will publish the current measured temperature.
 
 mode: the topic where the unit will publish the current heatpump mode (heat or idle).
+
+# Known problems
+The unit does heat up a bit, compared to the surrounding room temperature, which results in a temperature reading that is 1-2 degrees more than the actual temperature. So the target temperature needs to be increased accordingly. I.e. if you want to have 21 degrees in the room, set 22 or 23 degrees.
+This could possibly be compensated by increasing the value of R2 slightly, but this has not (yet) been tested.
