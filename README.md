@@ -14,8 +14,11 @@ PS. This is currently work in progress. The uploaded version of schematics and P
 
 # Prerequisites
 To use this unit, you need to have:
+
 A NIBE heatpump that is compatible with the RG20 room sensor (Doh!)
+
 An MQTT server (like mosquitto) running on a server somewhere.
+
 Some kind of home automation software to display a user interface and possibly atuomate the control of the unit (like Home Assistant).
 
 # How to connect to the heatpump
