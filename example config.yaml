@@ -1,0 +1,16 @@
+climate:
+  - platform: mqtt
+    name: Heatpump
+    current_temperature_topic: sensor/heatpump/current_temp_get
+    temperature_command_topic: sensor/heatpump/target_temp_set
+    temperature_state_topic: sensor/heatpump/target_temp_get
+    mode_state_topic: sensor/heatpump/mode
+    retain: true
+    initial: 22
+    modes:
+      - heat
+      - idle
+    swing_modes:
+    fan_modes:
+    away_modes:
+    aux_modes:
