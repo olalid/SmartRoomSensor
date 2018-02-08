@@ -32,10 +32,17 @@ One thing is different, the power connection is marked with "+" next to its scre
 # How to configure the unit
 When intially powered up the unit will start in access point mode, creating a WiFi network called "SmartRoomSensor".
 Connect to this network using a computer or a smartphone.
+
 Normally a web browser with the configuration interface should open automatically and you can enter the configuration details needed.
+
 You will need to enter the name of your Wifi network, the password, the MQTT server IP or name, MQTT server username/password (if any) and the topics for MQTT.
-There are 4 topics:
+
+There are 4 MQTT topics:
+
 tset: the topic the unit will subscribe to get updates on target temperature.
+
 tget: the topic where the unit will publish the configured target temperature.
+
 cget: the topic where the unit will publish the current measured temperature.
+
 mode: the topic where the unit will publish the current heatpump mode (heat or idle).
