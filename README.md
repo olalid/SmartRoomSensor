@@ -51,6 +51,11 @@ cget: the topic where the unit will publish the current measured temperature.
 
 mode: the topic where the unit will publish the current heatpump mode (heat or idle).
 
+# Gotchas
+The unit wakes up once a minute to set and read temperatures.
+Which means that there may be a delay of up to one minute when you set the temperature until it is updated on the heatpumps display.
+It may seem unecessary to use sleep mode in this application, but without doing this, the unit would get far to hot and the temperature readings would be useless.
+
 # Known problems
 The unit does heat up a bit, compared to the surrounding room temperature, which results in a temperature reading that is 1-2 degrees more than the actual temperature. So the target temperature needs to be increased accordingly. I.e. if you want to have 21 degrees in the room, set 22 or 23 degrees.
 This could possibly be compensated by increasing the value of R2 slightly, but this has not (yet) been tested.
