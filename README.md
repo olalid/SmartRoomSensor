@@ -22,6 +22,9 @@ An MQTT server (like mosquitto) running on a server somewhere.
 
 Some kind of home automation software to display a user interface and possibly atuomate the control of the unit (like Home Assistant).
 
+# Programming
+To program the unit, you will need an FTDI USB cable with part number TTL-232R-3V3 (Farnell 1329311). Connect this to the 6-pin header (JP1) and use Arduino (or equivalent) to download the software.
+
 # How to connect to the heatpump
 The sensor has a screw terminal that is used to connect wires coming from the heatpump.
 The marking on the PCB is the same as the original RG20, plus the additional terminal for the power.
